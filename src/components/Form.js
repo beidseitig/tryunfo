@@ -2,13 +2,55 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Form extends React.Component {
+  // constructor() {
+  //   super();
+
+  //   this.handleChange = this.handleChange.bind(this);
+
+  //   this.state = {
+  //     cardName: '',
+  //     cardDescription: '',
+  //     cardAttr1: '',
+  //     cardAttr2: '',
+  //     cardAttr3: '',
+  //     cardImage: '',
+  //     cardRare: '',
+  //     cardTrunfo: false,
+  //     hasTrunfo: false,
+  //     isSaveButtonDisabled: false,
+  //     onInputChange: '',
+  //     onSaveButtonClick: '',
+  //   };
+
+  // }
+
+  // handleChange({ target }) {
+  //   const { name } = target;
+  //   const value = target.type === 'checkbox' ? target.checked : target.value;
+
+  //   this.setState ({
+  //     [name]: value
+  //   })
+  // }
+
   render() {
-    const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
-      cardImage, cardRare, cardTrunfo, hasTrunfo,
-      isSaveButtonDisabled, onInputChange, onSaveButtonClick } = this.props;
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      hasTrunfo,
+      isSaveButtonDisabled,
+      onInputChange,
+      onSaveButtonClick,
+    } = this.props;
 
     return (
-      <>
+      <section>
         <input
           type="text"
           value={ cardName }
@@ -76,7 +118,7 @@ class Form extends React.Component {
           Salvar
         </button>
         {hasTrunfo}
-      </>
+      </section>
     );
   }
 }
