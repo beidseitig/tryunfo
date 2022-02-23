@@ -1,33 +1,99 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Form extends React.Component {
   render() {
+    const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3,
+      cardImage, cardRare, cardTrunfo, hasTrunfo,
+      isSaveButtonDisabled, onInputChange, onSaveButtonClick } = this.props;
+
     return (
       <>
-        <input type="text" data-testid="name-input" />
+        <input
+          type="text"
+          value={ cardName }
+          onChange={ onInputChange }
+          data-testid="name-input"
+        />
         <br />
-        <textarea data-testid="description-input" />
+        <textarea
+          value={ cardDescription }
+          onChange={ onInputChange }
+          data-testid="description-input"
+        />
         <br />
-        <input type="number" data-testid="attr1-input" />
+        <input
+          value={ cardAttr1 }
+          onChange={ onInputChange }
+          type="number"
+          data-testid="attr1-input"
+        />
         <br />
-        <input type="number" data-testid="attr2-input" />
+        <input
+          value={ cardAttr2 }
+          onChange={ onInputChange }
+          type="number"
+          data-testid="attr2-input"
+        />
         <br />
-        <input type="number" data-testid="attr3-input" />
+        <input
+          value={ cardAttr3 }
+          onChange={ onInputChange }
+          type="number"
+          data-testid="attr3-input"
+        />
         <br />
-        <input type="text" data-testid="image-input" />
+        <input
+          value={ cardImage }
+          onChange={ onInputChange }
+          type="text"
+          data-testid="image-input"
+        />
         <br />
-        <select data-testid="rare-input">
+        <select
+          value={ cardRare }
+          onChange={ onInputChange }
+          data-testid="rare-input"
+        >
           <option> normal </option>
           <option> raro </option>
           <option> muito raro </option>
         </select>
         <br />
-        <input type="checkbox" data-testid="trunfo-input" />
+        <input
+          type="checkbox"
+          checked={ cardTrunfo }
+          onChange={ onInputChange }
+          data-testid="trunfo-input"
+        />
         <br />
-        <button type="submit" data-testid="save-button"> Salvar </button>
+        <button
+          type="submit"
+          disabled={ isSaveButtonDisabled }
+          onClick={ onSaveButtonClick }
+          data-testid="save-button"
+        >
+          Salvar
+        </button>
+        {hasTrunfo}
       </>
     );
   }
 }
+
+Form.propTypes = {
+  cardName: PropTypes.string.isRequired,
+  cardDescription: PropTypes.string.isRequired,
+  cardAttr1: PropTypes.string.isRequired,
+  cardAttr2: PropTypes.string.isRequired,
+  cardAttr3: PropTypes.string.isRequired,
+  cardImage: PropTypes.string.isRequired,
+  cardRare: PropTypes.string.isRequired,
+  cardTrunfo: PropTypes.bool.isRequired,
+  hasTrunfo: PropTypes.bool.isRequired,
+  isSaveButtonDisabled: PropTypes.bool.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+  onSaveButtonClick: PropTypes.func.isRequired,
+};
 
 export default Form;
