@@ -18,6 +18,7 @@ class App extends React.Component {
       cardTrunfo: false,
       hasTrunfo: '',
       isSaveButtonDisabled: true,
+      isCard: true,
       cards: [],
     };
 
@@ -25,6 +26,8 @@ class App extends React.Component {
     this.saveButton = this.saveButton.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.addNewTopic = this.addNewTopic.bind(this);
+    this.removeTopic = this.removeTopic.bind(this);
+    this.checkTrunfo = this.checkTrunfo.bind(this);
   }
 
   onInputChange({ target }) {
@@ -51,11 +54,27 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       hasTrunfo: false,
-    });
+    },
+    () => this.checkTrunfo());
   }
 
   addNewTopic(card) {
     this.setState((prevState) => ({ cards: [...prevState.cards, card] }));
+  }
+
+  checkTrunfo() {
+    const { cards } = this.state;
+    const elem = cards.some((item) => item.cardTrunfo === true);
+    if (elem) {
+      this.setState({ hasTrunfo: true });
+    } else {
+      this.setState({ hasTrunfo: false });
+    }
+  }
+
+  removeTopic(cardName) {
+    const { cards } = this.state;
+    this.setState(({ cards: cards.filter((item) => item.cardName !== cardName) }));
   }
 
   saveButton() {
@@ -141,8 +160,10 @@ class App extends React.Component {
         </div>
         <div>
           { cards.map((newCard) => (
-            <div newCard={ newCard } key={ cardName }>
+            <div newCard={ newCard.cardName } key={ newCard.cardName }>
               <Card
+                key={ newCard.cardName }
+                isCard={ newCard.isCard }
                 cardName={ newCard.cardName }
                 cardDescription={ newCard.cardDescription }
                 cardAttr1={ newCard.cardAttr1 }
@@ -151,6 +172,7 @@ class App extends React.Component {
                 cardImage={ newCard.cardImage }
                 cardRare={ newCard.cardRare }
                 cardTrunfo={ newCard.cardTrunfo }
+                removeTopic={ this.removeTopic }
               />
             </div>
           ))}
